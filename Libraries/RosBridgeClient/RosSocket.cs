@@ -201,7 +201,7 @@ namespace RosSharp.RosBridgeClient
                     return Encoding.ASCII.GetBytes(json);
                 case SerializerEnum.BSON:
                     System.IO.MemoryStream ms = new System.IO.MemoryStream();
-                    Newtonsoft.Json.Bson.BsonDataWriter writer = new Newtonsoft.Json.Bson.BsonDataWriter(ms);
+                    Newtonsoft.Json.Bson.BsonWriter writer = new Newtonsoft.Json.Bson.BsonWriter(ms);
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Serialize(writer, obj);
                     return ms.ToArray();
@@ -219,7 +219,7 @@ namespace RosSharp.RosBridgeClient
                     return JsonConvert.DeserializeObject<T>(ascii);
                 case SerializerEnum.BSON:
                     System.IO.MemoryStream ms = new System.IO.MemoryStream(buffer);
-                    Newtonsoft.Json.Bson.BsonDataReader reader = new Newtonsoft.Json.Bson.BsonDataReader(ms);
+                    Newtonsoft.Json.Bson.BsonReader reader = new Newtonsoft.Json.Bson.BsonReader(ms);
                     return new JsonSerializer().Deserialize<T>(reader);
                 default:
                     throw new ArgumentException("Invalid Serializer");
